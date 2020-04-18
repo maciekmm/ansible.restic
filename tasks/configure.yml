@@ -4,7 +4,8 @@
   environment:
     RESTIC_REPOSITORY: '{{ item.value.location }}'
     RESTIC_PASSWORD: '{{ item.value.password }}'
-  no_log: true
+    B2_ACCOUNT_ID: '{{ item.value.b2_account_id | default("") }}'
+    B2_ACCOUNT_KEY: '{{ item.value.b2_account_key | default("") }}'
   register: restic_init
   changed_when: "'created restic repository' in restic_init.stdout"
   failed_when:
